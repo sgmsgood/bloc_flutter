@@ -40,6 +40,8 @@ class App extends StatelessWidget {
       create: (_) => ThemeCubit(),
       child: BlocBuilder<ThemeCubit, ThemeData>(
         builder: (_, theme) {
+
+          /// ThemeCubit의 상태를 기반으로 Widget을 return 합니다.
           return MaterialApp(
             theme: theme,
             home: BlocProvider(
@@ -136,7 +138,6 @@ class CounterBloc extends Bloc<CounterEvent, int> {
     }
   }
 }
-
 
 class ThemeCubit extends Cubit<ThemeData> {
   ThemeCubit() : super(_lightTheme);
