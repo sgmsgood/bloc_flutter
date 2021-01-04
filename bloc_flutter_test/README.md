@@ -2,7 +2,7 @@
 * Reference: https://pub.dev/packages/flutter_bloc
 
 ## Bloc Widget
-##### BlocBuilder
+#### BlocBuilder
 1. 'BlocBuilder'는 Cubit과 builder 함수를 요합니다.
 2. 'BlocBuilder'는 새로운 요청에 따른 응답으로 widget을 다룹니다.
 3. 'BlocBuilder'는 StreamBuilder와 매우 유사하지만, bolierplate code의 양을 줄이는 훨씬 간단한 API를 가지고 있습니다.
