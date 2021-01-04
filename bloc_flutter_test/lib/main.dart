@@ -33,10 +33,6 @@ void main() {
   runApp(App());
 }
 
-/// A [StatelessWidget] which uses:
-/// * [bloc](https://pub.dev/packages/bloc)
-/// * [flutter_bloc](https://pub.dev/packages/flutter_bloc)
-/// to manage the state of a counter.
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -57,8 +53,6 @@ class App extends StatelessWidget {
   }
 }
 
-/// A [StatelessWidget] which demonstrates
-/// how to consume and interact with a [CounterBloc].
 class CounterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -147,7 +141,6 @@ class CounterBloc extends Bloc<CounterEvent, int> {
 /// A simple [Cubit] which manages the [ThemeData] as its state.
 /// {@endtemplate}
 class ThemeCubit extends Cubit<ThemeData> {
-  /// {@macro brightness_cubit}
   ThemeCubit() : super(_lightTheme);
 
   static final _lightTheme = ThemeData(
