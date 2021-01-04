@@ -1,16 +1,13 @@
 # bloc_flutter_test
+* Reference: https://pub.dev/packages/flutter_bloc
 
-A new Flutter application.
+## Bloc Widget
+##### BlocBuilder
+1. 'BlocBuilder'는 Cubit과 builder 함수를 요합니다.
+2. 'BlocBuilder'는 새로운 요청에 따른 응답으로 widget을 다룹니다.
+3. 'BlocBuilder'는 StreamBuilder와 매우 유사하지만, bolierplate code의 양을 줄이는 훨씬 간단한 API를 가지고 있습니다.
+4. builder 함수는 잠재적으로 여러번 호출될 수 있으므로 반드시 '순수함수(Pure fuction)'로 구현하여 상태에 따라 응답을 반환하도록 해야합니다.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.

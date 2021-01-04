@@ -137,9 +137,7 @@ class CounterBloc extends Bloc<CounterEvent, int> {
   }
 }
 
-/// {@template brightness_cubit}
-/// A simple [Cubit] which manages the [ThemeData] as its state.
-/// {@endtemplate}
+
 class ThemeCubit extends Cubit<ThemeData> {
   ThemeCubit() : super(_lightTheme);
 
