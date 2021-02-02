@@ -1,4 +1,4 @@
-# bloc_flutter_test
+# bloc_flutter
 * Reference: https://pub.dev/packages/flutter_bloc
 
 ## Bloc Widget

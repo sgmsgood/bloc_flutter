@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -40,16 +39,15 @@ class App extends StatelessWidget {
       create: (_) => ThemeCubit(),
       child: BlocBuilder<ThemeCubit, ThemeData>(
         builder: (_, theme) {
-
-          /// ThemeCubit의 상태를 기반으로 Widget을 return 합니다.
           return MaterialApp(
             theme: theme,
             home: BlocProvider(
               create: (_) => CounterBloc(),
               child: CounterPage(),
-            ),
+              )
           );
         },
+        cubit: ThemeCubit(),
       ),
     );
   }
@@ -62,8 +60,14 @@ class CounterPage extends StatelessWidget {
       appBar: AppBar(title: const Text('Counter')),
       body: BlocBuilder<CounterBloc, int>(
         builder: (_, count) {
-          return Center(
-            child: Text('$count', style: Theme.of(context).textTheme.headline1),
+          return Column(
+            children: [
+              Center(
+                child: Text('$count',
+                    style: Theme.of(context).textTheme.headline1),
+              ),
+
+            ],
           );
         },
       ),
@@ -108,7 +112,6 @@ class CounterPage extends StatelessWidget {
   }
 }
 
-/// Event being processed by [CounterBloc].
 enum CounterEvent {
   /// Notifies bloc to increment state.
   increment,
@@ -117,9 +120,6 @@ enum CounterEvent {
   decrement
 }
 
-/// {@template counter_bloc}
-/// A simple [Bloc] which manages an `int` as its state.
-/// {@endtemplate}
 class CounterBloc extends Bloc<CounterEvent, int> {
   /// {@macro counter_bloc}
   CounterBloc() : super(0);
@@ -140,7 +140,8 @@ class CounterBloc extends Bloc<CounterEvent, int> {
 }
 
 class ThemeCubit extends Cubit<ThemeData> {
-  ThemeCubit() : super(_lightTheme);
+  /// {@macro brightness_cubit}
+  ThemeCubit() : super(_darkTheme);
 
   static final _lightTheme = ThemeData(
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
