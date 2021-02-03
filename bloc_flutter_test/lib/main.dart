@@ -28,7 +28,6 @@ class App extends StatelessWidget {
                       child: Scaffold(
                         appBar: AppBar(title: const Text('Counter')),
                         body: BlocBuilder<CounterCubit, int>(
-                          cubit: _counterCubit1,
                           builder: (_, count) {
                             log("@!!count: $count");
                             return Column(
@@ -50,7 +49,7 @@ class App extends StatelessWidget {
                       child: Scaffold(
                         appBar: AppBar(title: const Text('Counter')),
                         body: BlocBuilder<CounterCubit, int>(
-                          cubit: _counterCubit2,
+                          cubit: _counterCubit1,
                           builder: (_, count) {
                             log("@!!count: $count");
                             return Column(
@@ -125,7 +124,7 @@ class CounterCubit extends Cubit<int> {
 
 class ThemeCubit extends Cubit<ThemeData> {
   /// {@macro brightness_cubit}
-  ThemeCubit() : super(_darkTheme);
+  ThemeCubit() : super(_lightTheme);
 
   static final _lightTheme = ThemeData(
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
