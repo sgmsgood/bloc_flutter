@@ -2,7 +2,39 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b8e66eab-d933-49e3-871f-eba4e36de0e7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/firebase_todo_example/flutter_firebase_todo_app/lib/Shelf.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flutter_firebase_todo/lib/blocs/authentication_bloc/authentication_bloc.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flutter_firebase_todo/lib/blocs/authentication_bloc/authentication_event.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flutter_firebase_todo/lib/blocs/authentication_bloc/authentication_state.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flutter_firebase_todo/lib/blocs/authentication_bloc/bloc.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flutter_firebase_todo/lib/blocs/blocs.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flutter_firebase_todo/lib/blocs/filtered_todos/filtered_todos.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flutter_firebase_todo/lib/blocs/filtered_todos/filtered_todos_bloc.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flutter_firebase_todo/lib/blocs/filtered_todos/filtered_todos_event.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flutter_firebase_todo/lib/blocs/filtered_todos/filtered_todos_state.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flutter_firebase_todo/lib/blocs/simple_bloc_observer.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flutter_firebase_todo/lib/blocs/todos/todos.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flutter_firebase_todo/lib/blocs/todos/todos_bloc.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flutter_firebase_todo/lib/blocs/todos/todos_event.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flutter_firebase_todo/lib/blocs/todos/todos_state.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flutter_firebase_todo/lib/models/app_tab.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flutter_firebase_todo/lib/models/extra_action.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flutter_firebase_todo/lib/models/models.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flutter_firebase_todo/lib/models/visibility_filter.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flutter_firebase_todo/lib/screens/add_edit_screen.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flutter_firebase_todo/lib/screens/details_screen.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flutter_firebase_todo/lib/screens/home_screen.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flutter_firebase_todo/lib/screens/screens.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flutter_firebase_todo/todos_repository/lib/src/entities/entities.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flutter_firebase_todo/todos_repository/lib/src/entities/todo_entity.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flutter_firebase_todo/todos_repository/lib/src/firebase_todos_repository.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flutter_firebase_todo/todos_repository/lib/src/models/models.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flutter_firebase_todo/todos_repository/lib/src/models/todo.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flutter_firebase_todo/todos_repository/lib/src/todos_repository.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flutter_firebase_todo/user_repository/firebase_user_repository.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flutter_firebase_todo/user_repository/lib/src/user_repository.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flutter_http_test/lib/MyHomePage.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/flutter_http_test/lib/model/api_repository.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
