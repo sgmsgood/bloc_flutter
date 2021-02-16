@@ -1,4 +1,10 @@
-class ResultContents {
+
+import 'package:json_annotation/json_annotation.dart';
+
+part 'MovieContent.g.dart';
+
+@JsonSerializable(explicitToJson: true, nullable: true)
+class MovieContent {
   final bool adult;
   final String backImgPath;
   final List<int> genreIds;
@@ -14,7 +20,7 @@ class ResultContents {
   final double voteAvg;
   final int voteCount;
 
-  ResultContents(
+  MovieContent(
       {this.adult,
       this.backImgPath,
       this.genreIds,
@@ -30,22 +36,6 @@ class ResultContents {
       this.voteAvg,
       this.voteCount});
 
-  factory ResultContents.fromJson(Map<String, dynamic> json) {
-    return ResultContents(
-      adult: json['adult'],
-      backImgPath: json['backImgPath'],
-      genreIds: json['genreIds'],
-      id: json['id'],
-      originLang: json['originLang'],
-      originTitle: json['originTitle'],
-      overview: json['overview'],
-      popularity: json['popularity'],
-      posterPath: json['posterPath'],
-      releaseDate: json['releaseDate'],
-      title: json['title'],
-      video: json['video'],
-      voteAvg: json['voteAvg'],
-      voteCount: json['voteCount'],
-    );
-  }
+  factory MovieContent.fromJson(Map<String, dynamic> json) => _$MovieContentFromJson(json);
+  Map<String, dynamic> toJson() => _$MovieContentToJson(this);
 }
