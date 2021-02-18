@@ -2,36 +2,54 @@ import 'dart:developer';
 
 import 'package:bloc_todo_cubit/repository.dart';
 import 'package:bloc_todo_cubit/todo_model.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RepositoryCubit extends Cubit<ModelState> {
   final RepositoryType _repository;
 
-  RepositoryCubit(this._repository) : super(ModelState.init);
+  RepositoryCubit(this._repository) : super(InitialState()) {
+    loadAllTodos();
+  }
+
+  void loadAllTodos() {
+    final todos = _repository.all();
+    emit(LoadedAllState(todos));
+  }
 
   void add(TodoModel todoModel) {
-    emit(ModelState.start);
-    log('############---->');
+    emit(PreparingState());
     _repository.create(todoModel);
-    emit(ModelState.finish);
+    final todos = _repository.all();
+    emit(LoadedAllState(todos));
   }
 
   void delete(int index) {
 
   }
 
-  List<TodoModel> allData() {
-    return _repository.all();
+  void _getTodos() {
+
   }
 }
 
-enum ModelState {
-  init, start, finish
+abstract class ModelState extends Equatable {}
+
+class InitialState extends ModelState {
+  @override
+  List<Object> get props => [];
 }
 
-extension ModelStateExtenstion on ModelState {
-  List<TodoModel> getAllData(BuildContext context) {
-    return context.read<RepositoryCubit>().allData();
-  }
+class LoadedAllState extends ModelState {
+  LoadedAllState(this.todos);
+
+  final List<TodoModel> todos;
+
+  @override
+  List<Object> get props => [todos];
+}
+
+class PreparingState extends ModelState {
+  @override
+  List<Object> get props => [];
 }
