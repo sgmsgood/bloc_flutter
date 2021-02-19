@@ -14,13 +14,13 @@ class RepositoryCubit extends Cubit<ModelState> {
 
   void loadAllTodos() {
     final todos = _repository.all();
-    emit(LoadedAllState(todos));
+    emit(LLLL(todos));
   }
 
   void add(TodoModel todoModel) {
-    emit(PreparingState());
-    _repository.create(todoModel);
     final todos = _repository.all();
+    emit(PreparingState(todos));
+    _repository.create(todoModel);
     emit(LoadedAllState(todos));
   }
 
@@ -30,6 +30,19 @@ class RepositoryCubit extends Cubit<ModelState> {
 
   void _getTodos() {
 
+  }
+
+  @override
+  void onChange(Change<ModelState> change) {
+    // TODO: implement onChange
+    super.onChange(change);
+    log("@!!change: $change");
+  }
+
+  @override
+  Future<void> close() {
+    log("@!!closed!!!!!!!!!");
+    return super.close();
   }
 }
 
@@ -49,7 +62,21 @@ class LoadedAllState extends ModelState {
   List<Object> get props => [todos];
 }
 
-class PreparingState extends ModelState {
+class LLLL extends ModelState {
+  LLLL(this.todos);
+
+  final List<TodoModel> todos;
+
   @override
-  List<Object> get props => [];
+  List<Object> get props => [todos];
+}
+
+
+class PreparingState extends ModelState {
+  PreparingState(this.todos);
+
+  final List<TodoModel> todos;
+
+  @override
+  List<Object> get props => [todos];
 }

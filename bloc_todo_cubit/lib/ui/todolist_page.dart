@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -11,12 +13,16 @@ class TodoListPage extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            RaisedButton(onPressed: () {
-              Navigator.pushNamed(context, '/input');
-            },
-            child: Text('+'),),
+            RaisedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/input');
+              },
+              child: Text('+'),
+            ),
             BlocBuilder<RepositoryCubit, ModelState>(builder: (_, state) {
-              if (state is LoadedAllState) {
+              log("@!!listPageState: $state");
+              if (state is LLLL) {
+                log("@!!todo???: ${state.todos.length}");
                 return _buildTodoList(context, state.todos);
               } else {
                 return Container();
