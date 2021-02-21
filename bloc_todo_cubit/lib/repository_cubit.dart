@@ -28,8 +28,11 @@ class RepositoryCubit extends Cubit<ModelState> {
 
   }
 
-  void checkUpdate(int index) {
-
+  void checkUpdate(int index, bool val) {
+    final todos = _repository.all();
+    emit(PreparingState(todos));
+    _repository.checkUpdate(index, val);
+    emit(LoadedAllState(todos));
   }
 
   @override

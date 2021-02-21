@@ -1,9 +1,13 @@
+import 'dart:developer';
+
 import 'package:bloc_todo_cubit/todo_model.dart';
 
 abstract class RepositoryType {
   void create(TodoModel todoModel);
 
   void update(TodoModel todoModel);
+
+  TodoModel checkUpdate(int index, bool isChecked);
 
   TodoModel read(int index);
 
@@ -44,5 +48,12 @@ class InMemoryRepository extends RepositoryType {
   @override
   List<TodoModel> all() {
     return _data;
+  }
+
+  @override
+  List<TodoModel> checkUpdate(int index, bool isChecked) {
+    log("@!!bool: $isChecked");
+    // TodoModel(isChecked, _data[index].title, _data[index].description)
+    return _data[index];
   }
 }

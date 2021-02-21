@@ -46,8 +46,9 @@ class TodoListPage extends StatelessWidget {
               return CheckboxListTile(
                 value: list[index].isDone,
                 title: Text(list[index].title),
+                subtitle: Text(list[index].description),
                 onChanged: (val) {
-
+                  context.read<RepositoryCubit>().checkUpdate(index, val);
                 },
               );
             },
