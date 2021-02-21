@@ -21,8 +21,8 @@ class TodoListPage extends StatelessWidget {
             ),
             BlocBuilder<RepositoryCubit, ModelState>(builder: (_, state) {
               log("@!!listPageState: $state");
-              if (state is LLLL) {
-                log("@!!todo???: ${state.todos.length}");
+              if (state is LoadedAllState) {
+                log("@!!LoadedAllState");
                 return _buildTodoList(context, state.todos);
               } else {
                 return Container();
@@ -35,13 +35,22 @@ class TodoListPage extends StatelessWidget {
   }
 
   Widget _buildTodoList(BuildContext context, List<TodoModel> list) {
+    log("@!!list: ${list.length}");
     return Column(
       children: [
         Container(
           height: 500,
           child: ListView.builder(
-            itemBuilder: (context, index) => Text(list[index].description),
             itemCount: list.length,
+            itemBuilder: (context, index) {
+              return CheckboxListTile(
+                value: list[index].isDone,
+                title: Text(list[index].title),
+                onChanged: (val) {
+
+                },
+              );
+            },
           ),
         ),
       ],
