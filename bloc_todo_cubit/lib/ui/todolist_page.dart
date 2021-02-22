@@ -11,50 +11,77 @@ class TodoListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            RaisedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/input');
-              },
-              child: Text('+'),
+        child: Expanded(
+          child: Container(
+            height: double.maxFinite,
+            child: Expanded(
+              child: Column(
+                children: [
+                  RaisedButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/input');
+                    },
+                    child: Text('+'),
+                  ),
+                  BlocBuilder<RepositoryCubit, ModelState>(
+                    builder: (_, state) {
+                      log("@!!listPageState: $state");
+                      if (state is LoadedAllState) {
+                        log("@!!LoadedAllState");
+                        return _buildTodoList(context, state.todos);
+                      } else {
+                        return Container();
+                      }
+                    },
+                  ),
+                ],
+              ),
             ),
-            BlocBuilder<RepositoryCubit, ModelState>(builder: (_, state) {
-              log("@!!listPageState: $state");
-              if (state is LoadedAllState) {
-                log("@!!LoadedAllState");
-                return _buildTodoList(context, state.todos);
-              } else {
-                return Container();
-              }
-            }),
-          ],
+          ),
         ),
       ),
     );
   }
 
   Widget _buildTodoList(BuildContext context, List<TodoModel> list) {
-    log("@!!list: ${list.length}");
-    return Column(
-      children: [
-        Container(
-          height: 500,
-          child: ListView.builder(
-            itemCount: list.length,
-            itemBuilder: (context, index) {
-              return CheckboxListTile(
-                value: list[index].isDone,
-                title: Text(list[index].title),
-                subtitle: Text(list[index].description),
-                onChanged: (val) {
-                  context.read<RepositoryCubit>().checkUpdate(index, val);
-                },
-              );
-            },
+    return Flexible(
+      flex: 1,
+      child: Column(
+        children: [
+          Container(
+            height: 700,
+            child: ListView.builder(
+              itemCount: list.length,
+              itemBuilder: (context, index) {
+                return Stack(
+                  children: [
+                    CheckboxListTile(
+                      value: list[index].isDone,
+                      title: Text(list[index].title),
+                      subtitle: Text(list[index].description),
+                      onChanged: (val) {
+                        context.read<RepositoryCubit>().checkUpdate(index, val);
+                      },
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10.0),
+                      child: Align(
+                        alignment: Alignment(0.75, 0.0),
+                        child: IconButton(
+                          onPressed: () {
+                            context.read<RepositoryCubit>().delete(index);
+                          },
+                          icon: Icon(Icons.delete_outlined),
+                        ),
+                      ),
+                    ),
+                  ],
+                );
+              },
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

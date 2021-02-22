@@ -7,7 +7,7 @@ abstract class RepositoryType {
 
   void update(TodoModel todoModel);
 
-  TodoModel checkUpdate(int index, bool isChecked);
+  void checkUpdate(int index, bool isChecked);
 
   TodoModel read(int index);
 
@@ -51,9 +51,12 @@ class InMemoryRepository extends RepositoryType {
   }
 
   @override
-  List<TodoModel> checkUpdate(int index, bool isChecked) {
+  void checkUpdate(int index, bool isChecked) {
     log("@!!bool: $isChecked");
     // TodoModel(isChecked, _data[index].title, _data[index].description)
-    return _data[index];
+    if(_data.length != index) {
+      _data.insert(index,  TodoModel(isChecked, _data[index].title, _data[index].description));
+      _data.removeAt(index+1);
+    }
   }
 }

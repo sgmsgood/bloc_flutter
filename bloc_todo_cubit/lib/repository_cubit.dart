@@ -25,7 +25,10 @@ class RepositoryCubit extends Cubit<ModelState> {
   }
 
   void delete(int index) {
-
+    final todos = _repository.all();
+    emit(PreparingState(todos));
+    _repository.delete(index);
+    emit(LoadedAllState(todos));
   }
 
   void checkUpdate(int index, bool val) {
@@ -37,7 +40,6 @@ class RepositoryCubit extends Cubit<ModelState> {
 
   @override
   void onChange(Change<ModelState> change) {
-    // TODO: implement onChange
     super.onChange(change);
     log("@!!change: $change");
   }

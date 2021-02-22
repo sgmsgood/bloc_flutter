@@ -48,7 +48,8 @@ class TodoInputPage extends StatelessWidget {
                 context
                     .read<RepositoryCubit>()
                     .add(TodoModel(false, title.text, description.text));
-                Navigator.of(context).pushNamed('/').then((value) => context.read<RepositoryCubit>());
+                Navigator.popUntil(context, ModalRoute.withName('/'));
+                Navigator.of(context).popAndPushNamed('/').then((value) => context.read<RepositoryCubit>());
               },
               child: Text('Create'),
             ),
