@@ -1,8 +1,10 @@
 import 'dart:developer';
 
+import 'package:bloc_todo_cubit/ui/todo_input_title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../repository.dart';
 import '../repository_cubit.dart';
 import '../todo_model.dart';
 
@@ -11,32 +13,26 @@ class TodoListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Expanded(
-          child: Container(
-            height: double.maxFinite,
-            child: Expanded(
-              child: Column(
-                children: [
-                  RaisedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/input');
-                    },
-                    child: Text('+'),
-                  ),
-                  BlocBuilder<RepositoryCubit, ModelState>(
-                    builder: (_, state) {
-                      log("@!!listPageState: $state");
-                      if (state is LoadedAllState) {
-                        log("@!!LoadedAllState");
-                        return _buildTodoList(context, state.todos);
-                      } else {
-                        return Container();
-                      }
-                    },
-                  ),
-                ],
+        child: Container(
+          height: double.maxFinite,
+          child: Column(
+            children: [
+              RaisedButton(
+                onPressed: () {
+                  _pushInputTitlePage(context);
+                },
+                child: Text('+'),
               ),
-            ),
+              BlocBuilder<RepositoryCubit, ModelState>(
+                builder: (_, state) {
+                  if (state is LoadedAllState) {
+                    return _buildTodoList(context, state.todos);
+                  } else {
+                    return Container();
+                  }
+                },
+              ),
+            ],
           ),
         ),
       ),
@@ -81,6 +77,18 @@ class TodoListPage extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  void _pushInputTitlePage(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => RepositoryCubit(context.read<InMemoryRepository>()),
+            child: TodoInPutTitle(),
+          )
       ),
     );
   }

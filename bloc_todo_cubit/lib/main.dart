@@ -30,10 +30,10 @@ class MyApp extends StatelessWidget {
                 create: (context) => RepositoryCubit(context.read<InMemoryRepository>()),
                 child: TodoListPage(),
               ),
-          '/input': (context) => BlocProvider(
-                create: (context) => RepositoryCubit(context.read<InMemoryRepository>()),
-                child: TodoInputPage(),
-              ),
+          // '/input': (context) => BlocProvider(
+          //       create: (context) => RepositoryCubit(context.read<InMemoryRepository>()),
+          //       child: TodoInputPage(),
+          //     ),
         },
       ),
     );

@@ -12,13 +12,15 @@ class TodoInputPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<RepositoryCubit, ModelState>(builder: (_, state) {
-      if (state is LoadedAllState) {
-        return _buildInput(context);
-      } else {
-        return Container();
-      }
-    });
+    return BlocBuilder<RepositoryCubit, ModelState>(
+      builder: (_, state) {
+        if (state is LoadedAllState) {
+          return _buildInput(context);
+        } else {
+          return Container();
+        }
+      },
+    );
   }
 
   Widget _buildInput(BuildContext context) {
@@ -49,7 +51,9 @@ class TodoInputPage extends StatelessWidget {
                     .read<RepositoryCubit>()
                     .add(TodoModel(false, title.text, description.text));
                 Navigator.popUntil(context, ModalRoute.withName('/'));
-                Navigator.of(context).popAndPushNamed('/').then((value) => context.read<RepositoryCubit>());
+                Navigator.of(context)
+                    .popAndPushNamed('/')
+                    .then((value) => context.read<RepositoryCubit>());
               },
               child: Text('Create'),
             ),
