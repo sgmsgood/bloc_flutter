@@ -53,19 +53,19 @@ class TodoInPutTitle extends StatelessWidget {
   Widget _raisedButton(BuildContext context) {
     return RaisedButton(
       onPressed: () {
-        _pushInputDescriptionPage(context);
+        _pushInputDescriptionPage(context, title.text);
       },
       child: Text("Next"),
     );
   }
 
-  void _pushInputDescriptionPage(BuildContext context) {
+  void _pushInputDescriptionPage(BuildContext context, String title) {
     Navigator.push(
       context,
       MaterialPageRoute(
           builder: (context) => BlocProvider(
             create: (context) => RepositoryCubit(context.read<InMemoryRepository>()),
-            child: TodoInputDescription(),
+            child: TodoInputDescription(title: title),
           )
       ),
     );
