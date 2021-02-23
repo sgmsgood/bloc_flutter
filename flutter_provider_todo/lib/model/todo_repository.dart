@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 import 'Todo.dart';
@@ -13,6 +15,7 @@ class TodoRepository with ChangeNotifier {
   }
 
   List<Todo> readAll() {
+    log("@!!list:");
     return _todoList;
   }
 

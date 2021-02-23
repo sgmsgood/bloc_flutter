@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_provider_todo/model/todo_repository.dart';
+import 'package:flutter_provider_todo/ui/input_todo_view.dart';
 import 'package:provider/provider.dart';
 
 import 'model/Todo.dart';
@@ -44,7 +45,7 @@ class MyHomePage extends StatelessWidget {
   Widget _buildButton(BuildContext context) {
     return RaisedButton(
         onPressed: () {
-          context.read<TodoRepository>().add(Todo(false, "Take a Breakfast", "Grilled Chicken Salad"));
+          Navigator.of(context).push(MaterialPageRoute(builder: (context) => Provider(create: (context) => TodoRepository(), child: InputTodoView())));
         },
         child: Text("Add Schedule"));
   }
