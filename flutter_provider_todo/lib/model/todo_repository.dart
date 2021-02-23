@@ -13,8 +13,20 @@ class TodoRepository with ChangeNotifier {
   }
 
   List<Todo> readAll() {
-    if(_todoList.isNotEmpty || _todoList != null) {
-      return _todoList;
+    return _todoList;
+  }
+
+  void delete(int index) {
+    _todoList.removeAt(index);
+    notifyListeners();
+  }
+
+  void checkUpdate(int index, bool isChecked) {
+    if (_todoList.length != index) {
+      _todoList.insert(index, Todo(
+          isChecked, _todoList[index].title, _todoList[index].description));
+      _todoList.removeAt(index + 1);
     }
+    notifyListeners();
   }
 }

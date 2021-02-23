@@ -29,24 +29,60 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _buildButton(context),
-            ],
-          ),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _buildButton(context),
+            _buildListView(context),
+          ],
         ),
       ),
     );
   }
 
   Widget _buildButton(BuildContext context) {
-    return RaisedButton(onPressed: () {
-      context.read<TodoRepository>().add(Todo(false, "23일에는", "무엇을 합니까"));
-    }, child: Text("Add Schedule"));
+    return RaisedButton(
+        onPressed: () {
+          context.read<TodoRepository>().add(Todo(false, "Take a Breakfast", "Grilled Chicken Salad"));
+        },
+        child: Text("Add Schedule"));
   }
 
-
+  Widget _buildListView(BuildContext context) {
+    var todoList = context.watch<TodoRepository>().readAll();
+    return Expanded(
+      child: ListView.builder(
+        scrollDirection: Axis.vertical,
+        shrinkWrap: true,
+        itemCount: todoList.length,
+        itemBuilder: (context, index) {
+          return Stack(
+            children: [
+              CheckboxListTile(
+                value: todoList[index].isDone,
+                title: Text(todoList[index].title),
+                subtitle: Text(todoList[index].description),
+                onChanged: (val) {
+                  context.read<TodoRepository>().delete(index);
+                },
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 10.0),
+                child: Align(
+                  alignment: Alignment(0.75, 0.0),
+                  child: IconButton(
+                    onPressed: () {
+                      context.read<TodoRepository>().delete(index);
+                    },
+                    icon: Icon(Icons.delete_outlined),
+                  ),
+                ),
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
 }
