@@ -1,13 +1,15 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_provider_todo/model/todo_repository.dart';
 import 'package:flutter_provider_todo/ui/input_todo_view.dart';
 import 'package:provider/provider.dart';
 
-import 'model/Todo.dart';
-
 void main() {
   runApp(
-      ChangeNotifierProvider(create: (_) => TodoRepository(), child: MyApp()));
+    MultiProvider(providers: [
+      ChangeNotifierProvider(create: (_) => TodoRepository()),
+    ], child: MyApp(),),);
 }
 
 class MyApp extends StatelessWidget {
@@ -20,7 +22,10 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => MyHomePage(),
+      },
     );
   }
 }
@@ -35,7 +40,11 @@ class MyHomePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             _buildButton(context),
-            _buildListView(context),
+            Consumer<TodoRepository>(
+              builder: (context, todo, child) {
+                return _buildListView(todo.todoList);
+              },
+            )
           ],
         ),
       ),
@@ -45,27 +54,29 @@ class MyHomePage extends StatelessWidget {
   Widget _buildButton(BuildContext context) {
     return RaisedButton(
         onPressed: () {
-          Navigator.of(context).push(MaterialPageRoute(builder: (context) => Provider(create: (context) => TodoRepository(), child: InputTodoView())));
+          Navigator.of(context).push(MaterialPageRoute(builder: (context) => Provider(create: (context) => InputTodoView(), child: InputTodoView())));
+          // Provider(create: (context) => InputTodoView());
         },
         child: Text("Add Schedule"));
   }
 
-  Widget _buildListView(BuildContext context) {
-    var todoList = context.watch<TodoRepository>().readAll();
+  Widget _buildListView(List<dynamic> list) {
+    // var todoList = context.watch<TodoRepository>().readAll();
+    // log("@!!list: ${list.length}");
     return Expanded(
       child: ListView.builder(
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
-        itemCount: todoList.length,
+        itemCount: list.length,
         itemBuilder: (context, index) {
           return Stack(
             children: [
               CheckboxListTile(
-                value: todoList[index].isDone,
-                title: Text(todoList[index].title),
-                subtitle: Text(todoList[index].description),
+                value: list[index].isDone,
+                title: Text(list[index].title),
+                subtitle: Text(list[index].description),
                 onChanged: (val) {
-                  context.read<TodoRepository>().delete(index);
+                  context.read<TodoRepository>().checkUpdate(index, val);
                 },
               ),
               Padding(

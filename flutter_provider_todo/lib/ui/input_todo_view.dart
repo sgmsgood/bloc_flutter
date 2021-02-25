@@ -32,8 +32,8 @@ class InputTodoView extends StatelessWidget {
             Container(height: 20),
             RaisedButton(
               onPressed: () {
-                Consumer<TodoRepository>(context, listen: true).add(Todo(false, title.text, description.text));
-                Navigator.popUntil(context, (route) => false);
+                Provider.of<TodoRepository>(context, listen: false).add(Todo(false, title.text, description.text));
+                Navigator.pop(context, ModalRoute.withName('/'));
               },
               child: Text('Create'),
             ),

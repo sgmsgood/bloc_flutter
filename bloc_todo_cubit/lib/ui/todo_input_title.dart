@@ -60,11 +60,13 @@ class TodoInPutTitle extends StatelessWidget {
   }
 
   void _pushInputDescriptionPage(BuildContext context, String title) {
+    var cubit = context.read<RepositoryCubit>();
+
     Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) => BlocProvider(
-            create: (context) => RepositoryCubit(context.read<InMemoryRepository>()),
+          builder: (context) => BlocProvider.value(
+            value: cubit,
             child: TodoInputDescription(title: title),
           )
       ),

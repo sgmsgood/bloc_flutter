@@ -11,11 +11,11 @@ class TodoRepository with ChangeNotifier {
 
   void add(Todo todo) {
     _todoList.add(todo);
+    log("@!!list:${_todoList.length}");
     notifyListeners();
   }
 
   List<Todo> readAll() {
-    log("@!!list:");
     return _todoList;
   }
 

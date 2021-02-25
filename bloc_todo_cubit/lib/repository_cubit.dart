@@ -19,21 +19,21 @@ class RepositoryCubit extends Cubit<ModelState> {
 
   void add(TodoModel todoModel) {
     final todos = _repository.all();
-    emit(PreparingState(todos));
+    emit(PreparingState());
     _repository.create(todoModel);
     emit(LoadedAllState(todos));
   }
 
   void delete(int index) {
     final todos = _repository.all();
-    emit(PreparingState(todos));
+    emit(PreparingState());
     _repository.delete(index);
     emit(LoadedAllState(todos));
   }
 
   void checkUpdate(int index, bool val) {
     final todos = _repository.all();
-    emit(PreparingState(todos));
+    emit(PreparingState());
     _repository.checkUpdate(index, val);
     emit(LoadedAllState(todos));
   }
@@ -68,10 +68,6 @@ class LoadedAllState extends ModelState {
 }
 
 class PreparingState extends ModelState {
-  PreparingState(this.todos);
-
-  final List<TodoModel> todos;
-
   @override
-  List<Object> get props => [todos];
+  List<Object> get props => [];
 }

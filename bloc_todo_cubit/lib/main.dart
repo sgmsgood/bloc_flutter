@@ -16,9 +16,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider.value(
-      value: repository,
-      child: MaterialApp(
+    return MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
           primarySwatch: Colors.blue,
@@ -26,8 +24,8 @@ class MyApp extends StatelessWidget {
         ),
         initialRoute: '/',
         routes: {
-          '/': (context) => BlocProvider(
-                create: (context) => RepositoryCubit(context.read<InMemoryRepository>()),
+          '/': (context) => BlocProvider.value(
+                value: RepositoryCubit(InMemoryRepository()),
                 child: TodoListPage(),
               ),
           // '/input': (context) => BlocProvider(
@@ -35,7 +33,6 @@ class MyApp extends StatelessWidget {
           //       child: TodoInputPage(),
           //     ),
         },
-      ),
     );
   }
 }

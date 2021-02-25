@@ -61,9 +61,6 @@ class TodoInputDescription extends StatelessWidget {
             .read<RepositoryCubit>()
             .add(TodoModel(false, title, description.text));
         Navigator.popUntil(context, ModalRoute.withName('/'));
-        Navigator.of(context)
-            .popAndPushNamed('/')
-            .then((value) => context.read<RepositoryCubit>());
       },
       child: Text("Complete"),
     );
