@@ -5,11 +5,18 @@ import 'package:flutter_provider_todo/model/todo_repository.dart';
 import 'package:flutter_provider_todo/ui/input_todo_view.dart';
 import 'package:provider/provider.dart';
 
+import 'model/Todo.dart';
+
 void main() {
   runApp(
-    MultiProvider(providers: [
-      ChangeNotifierProvider(create: (_) => TodoRepository()),
-    ], child: MyApp(),),);
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => TodoRepository()),
+        Provider<String>(create: (_) => DateTime.now().toString()),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -39,10 +46,26 @@ class MyHomePage extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            _buildButton(context),
-            Consumer<TodoRepository>(
-              builder: (context, todo, child) {
-                return _buildListView(todo.todoList);
+            Row(
+              children: [
+                _buildButton(context),
+                RaisedButton(
+                    onPressed: () {
+                      log('############# ${'test'.replaceRange(0, 3, '*')}');
+                      Provider.of<String>(context, listen: false).replaceRange(0, 3, '*');
+                    },
+                    child: Text("test"),)
+              ],
+            ),
+            // Consumer<TodoRepository>(
+            //   builder: (context, todo, child) {
+            //     return _buildListView(todo.todoList);
+            //   },
+            // )
+            Selector<TodoRepository, int>(
+              selector: (context, repository) => repository.todoList.length,
+              builder: (context, list, child) {
+                return _buildListView(context.read<TodoRepository>().readAll());
               },
             )
           ],
@@ -54,15 +77,16 @@ class MyHomePage extends StatelessWidget {
   Widget _buildButton(BuildContext context) {
     return RaisedButton(
         onPressed: () {
-          Navigator.of(context).push(MaterialPageRoute(builder: (context) => Provider(create: (context) => InputTodoView(), child: InputTodoView())));
-          // Provider(create: (context) => InputTodoView());
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => InputTodoView(),
+            ),
+          );
         },
-        child: Text("Add Schedule"));
+        child: Text(context.watch<String>()));
   }
 
   Widget _buildListView(List<dynamic> list) {
-    // var todoList = context.watch<TodoRepository>().readAll();
-    // log("@!!list: ${list.length}");
     return Expanded(
       child: ListView.builder(
         scrollDirection: Axis.vertical,

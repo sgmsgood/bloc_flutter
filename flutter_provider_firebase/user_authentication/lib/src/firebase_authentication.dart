@@ -10,8 +10,6 @@ class FirebaseAuthenticationRepository with ChangeNotifier implements Authentica
   FirebaseAuthenticationRepository({FirebaseAuth firebaseAuth})
       : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance;
 
-  Future<bool> currentUser;
-
   @override
   Future<void> authenticate(){
     return _firebaseAuth.signInAnonymously();
@@ -19,18 +17,13 @@ class FirebaseAuthenticationRepository with ChangeNotifier implements Authentica
 
   @override
   Future<String> getUserId() async{
-    log("@!!currentUser: ${_firebaseAuth.currentUser.uid}}");
+    log("@!!currentUser: ${_firebaseAuth.currentUser.uid}");
     return (_firebaseAuth.currentUser).uid;
   }
 
   @override
-  Future<bool> _isAuthenticated() async{
+  Future<bool> isAuthenticated() async{
     final currentUser = _firebaseAuth.currentUser;
     return currentUser != null;
-  }
-
-  void isAuthenticated() {
-    currentUser = _isAuthenticated();
-
   }
 }

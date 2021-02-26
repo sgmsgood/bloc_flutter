@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_provider_firebase/ui/test_list_view.dart';
+import 'package:flutter_provider_firebase/ui/check_is_login.dart';
 import 'package:provider/provider.dart';
 import 'package:user_authentication/user_authentication.dart';
 
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         ),
         initialRoute: '/',
         routes: {
-          '/': (context) => TestListView(),
+          '/': (context) => CheckIsLogin(),
         },
       ),
     );
