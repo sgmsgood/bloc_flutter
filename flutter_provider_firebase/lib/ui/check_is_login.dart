@@ -1,26 +1,43 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_provider_firebase/ui/todo_list_page.dart';
 import 'package:provider/provider.dart';
 import 'package:user_authentication/user_authentication.dart';
 
 class CheckIsLogin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    log("@!!isAuth?: $getisAuthenticated");
-    return Container();
-  }
+    var authProvider = context.read<FirebaseAuthenticationRepository>();
+    var userId;
 
-  bool getisAuthenticated(BuildContext context) {
-    var result;
-    Provider
-        .of<FirebaseAuthenticationRepository>(context)
-        .isAuthenticated()
-        .then((value) {
-      log("@!!result: $value");
-      result = value;
+    _authGoogle(context);
+
+    authProvider.getUserId().then((value) {
+      if(value.isEmpty || value == null) {
+        userId = "";
+      } else {
+        userId = value;
+      }
     });
 
-    return result;
+    if(userId != "" || userId != null) {
+      return TodoListPage();
+    } else {
+      return Container(color: Colors.red,);
+    }
+  }
+
+  _authGoogle (BuildContext context) {
+    var authProvider = context.read<FirebaseAuthenticationRepository>();
+
+    authProvider.isAuthenticated().then((value) {
+      log("@!!resultValue: $value");
+      if (value) {
+        return;
+      }
+      authProvider.authenticate();
+    });
+
   }
 }

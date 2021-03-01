@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_provider_firebase/ui/check_is_login.dart';
 import 'package:provider/provider.dart';
+import 'package:todos_repository/todos_repository.dart';
 import 'package:user_authentication/user_authentication.dart';
 
 void main() async{
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<FirebaseAuthenticationRepository>(create:(context) => FirebaseAuthenticationRepository()),
+        ChangeNotifierProvider<FirebaseTodosRepository>(create:(context) => FirebaseTodosRepository()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

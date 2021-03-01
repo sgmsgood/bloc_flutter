@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:user_authentication/src/authentication_repository.dart';
 
-class FirebaseAuthenticationRepository with ChangeNotifier implements AuthenticationRepository{
+class FirebaseAuthenticationRepository extends ChangeNotifier implements AuthenticationRepository{
   final FirebaseAuth _firebaseAuth;
 
   FirebaseAuthenticationRepository({FirebaseAuth firebaseAuth})
@@ -12,6 +12,7 @@ class FirebaseAuthenticationRepository with ChangeNotifier implements Authentica
 
   @override
   Future<void> authenticate(){
+    notifyListeners();
     return _firebaseAuth.signInAnonymously();
   }
 
