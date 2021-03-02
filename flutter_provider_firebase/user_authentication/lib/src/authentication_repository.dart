@@ -1,7 +1,5 @@
 abstract class AuthenticationRepository {
-  Future<bool> isAuthenticated();
+  Future<bool> checkAuthenticated();
 
   Future<void> authenticate();
-
-  Future<String> getUserId();
 }

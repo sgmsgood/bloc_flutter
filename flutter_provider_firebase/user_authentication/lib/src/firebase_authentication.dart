@@ -6,25 +6,25 @@ import 'package:user_authentication/src/authentication_repository.dart';
 
 class FirebaseAuthenticationRepository extends ChangeNotifier implements AuthenticationRepository{
   final FirebaseAuth _firebaseAuth;
+  var _isAuth = false;
 
   FirebaseAuthenticationRepository({FirebaseAuth firebaseAuth})
       : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance;
 
   @override
-  Future<void> authenticate(){
+  Future<void> authenticate() async {
+    var result = await _firebaseAuth.signInAnonymously();
+    _isAuth = result != null;
     notifyListeners();
-    return _firebaseAuth.signInAnonymously();
   }
 
   @override
-  Future<String> getUserId() async{
-    log("@!!currentUser: ${_firebaseAuth.currentUser.uid}");
-    return (_firebaseAuth.currentUser).uid;
+  Future<bool> checkAuthenticated() async {
+    _isAuth = _firebaseAuth.currentUser != null;
+    return Future.value(_isAuth);
   }
-
-  @override
-  Future<bool> isAuthenticated() async{
-    final currentUser = _firebaseAuth.currentUser;
-    return currentUser != null;
+  
+  bool isAuth() {
+    return _isAuth;
   }
 }
