@@ -4,11 +4,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:user_authentication/src/authentication_repository.dart';
 
-class FirebaseAuthenticationRepository extends ChangeNotifier implements AuthenticationRepository{
+class FirebaseAuthModel extends ChangeNotifier implements AuthModel{
   final FirebaseAuth _firebaseAuth;
   var _isAuth = false;
 
-  FirebaseAuthenticationRepository({FirebaseAuth firebaseAuth})
+  FirebaseAuthModel({FirebaseAuth firebaseAuth})
       : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance;
 
   @override
@@ -19,9 +19,9 @@ class FirebaseAuthenticationRepository extends ChangeNotifier implements Authent
   }
 
   @override
-  Future<bool> checkAuthenticated() async {
+  bool checkAuthenticated() {
     _isAuth = _firebaseAuth.currentUser != null;
-    return Future.value(_isAuth);
+    return _isAuth;
   }
   
   bool isAuth() {

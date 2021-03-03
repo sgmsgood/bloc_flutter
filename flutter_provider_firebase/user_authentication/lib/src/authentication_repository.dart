@@ -1,5 +1,5 @@
-abstract class AuthenticationRepository {
-  Future<bool> checkAuthenticated();
+abstract class AuthModel {
+  bool checkAuthenticated();
 
   Future<void> authenticate();
 }

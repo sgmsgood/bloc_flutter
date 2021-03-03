@@ -11,49 +11,24 @@ import 'package:user_authentication/user_authentication.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MyApp());
+
+  runApp(ChangeNotifierProvider<FirebaseAuthModel>(
+      create: (context) => FirebaseAuthModel(), child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider<FirebaseAuthenticationRepository>(
-            create: (context) => FirebaseAuthenticationRepository()),
-        ChangeNotifierProvider<FirebaseTodosRepository>(
-            create: (context) => FirebaseTodosRepository()),
-      ],
-      child: MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-        ),
-        initialRoute: '/',
-        routes: {
-          '/': (context) {
-            var model = context.read<FirebaseAuthenticationRepository>();
-           // model.checkAuthenticated();
-
-            return FutureBuilder(
-              future: model.checkAuthenticated(),
-              builder: (context, snapshot) {
-                if(snapshot.connectionState != ConnectionState.done) {
-                  return CheckIsLogin();
-                }
-
-                return snapshot.data ? TodoListPage() : CheckIsLogin();
-              }
-            );
-
-            // return Provider<bool>(
-            //   create: (_) => model.checkAuthenticated(),
-            //   child: (_) => Container(),
-            // )
-          }
-        },
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => context.read<FirebaseAuthModel>().isAuth() ? TodoListPage() :  CheckIsLogin(),
+      },
     );
   }
 }
