@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "18132961182-eiris3fs30a61fu69h1n47ghgso9m9q8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.elenworld.flutter_provider_firebase",
+            "certificate_hash": "a789e505c817a122ea906ea6eaa3d48b3a30ab18"
+          }
+        },
+        {
           "client_id": "18132961182-1h5t529csu8bs8jhdmhk6v6il1sgqn25.apps.googleusercontent.com",
           "client_type": 3
         }

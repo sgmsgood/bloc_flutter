@@ -9,25 +9,71 @@ import 'package:user_authentication/user_authentication.dart';
 class LoginView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var padding = MediaQuery.of(context).padding;
+    var deviceWidth = MediaQuery.of(context).size.width;
+    var deviceHeight =
+        MediaQuery.of(context).size.height - padding.top - padding.bottom;
+
     return Scaffold(
+      backgroundColor: Color(0xffa56c6f),
       body: SafeArea(
         child: Center(
           child: Container(
-            child: RaisedButton(
-              onPressed: () => _authAnonymously(context),
-              child: Text('login'),
-            ),
+            child: _loginWithGoogleButton(context, deviceWidth, deviceHeight)
           ),
         ),
       ),
     );
   }
 
+  Widget _loginWithGoogleButton(
+      BuildContext context, double deviceWidth, double deviceHeight) {
+    return InkWell(
+      child: Container(
+        width: deviceWidth / 2,
+        height: deviceHeight / 18,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          color: Color(0xfff4dbde),
+        ),
+        child: Center(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Container(
+                height: 30.0,
+                width: 30.0,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/google.png'),
+                    fit: BoxFit.cover
+                  ),
+                  shape: BoxShape.circle,
+                ),
+              ),
+              Text(
+                'Sign in with Google',
+                style: TextStyle(
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xff46180f)
+                ),
+              )
+            ],
+          ),
+        )
+      ),
+      onTap: () => _authAnonymously(context),
+    );
+  }
+
   void _authAnonymously(BuildContext context) async {
     var authModel = context.read<FirebaseAuthModel>();
 
-    await authModel.authenticate();
-    if(!authModel.checkAuthenticated()) {
+    var signResult = await authModel.signInWithGoogle();
+
+    log("@!!signResult: $signResult");
+    if(signResult == null) {
       return;
     }
 
