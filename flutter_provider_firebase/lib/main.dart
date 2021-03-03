@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_provider_firebase/ui/check_is_login.dart';
+import 'package:flutter_provider_firebase/ui/login_view.dart';
 import 'package:flutter_provider_firebase/ui/todo_list_page.dart';
 import 'package:provider/provider.dart';
 import 'package:todos_repository/todos_repository.dart';
@@ -19,6 +19,8 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    log("@!!isAuth: ${context.read<FirebaseAuthModel>().isAuth()}");
+
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -27,7 +29,9 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => context.read<FirebaseAuthModel>().isAuth() ? TodoListPage() :  CheckIsLogin(),
+        '/': (context) => context.read<FirebaseAuthModel>().isAuth() ? TodoListPage() :  LoginView(),
+        '/loginPage': (context) => LoginView(),
+        '/listPage': (context) => TodoListPage(),
       },
     );
   }
