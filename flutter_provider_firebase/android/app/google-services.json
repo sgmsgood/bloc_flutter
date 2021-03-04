@@ -7,14 +7,14 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:18132961182:android:bebe081a6966b5c8b9388f",
+        "mobilesdk_app_id": "1:18132961182:android:4e40792590bf8fa5b9388f",
         "android_client_info": {
           "package_name": "com.elenworld.flutter_provider_firebase"
         }
       },
       "oauth_client": [
         {
-          "client_id": "18132961182-eiris3fs30a61fu69h1n47ghgso9m9q8.apps.googleusercontent.com",
+          "client_id": "18132961182-f8uo5tuir78aipuro5gakh263cbkhbto.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.elenworld.flutter_provider_firebase",

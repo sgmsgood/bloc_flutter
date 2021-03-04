@@ -63,13 +63,13 @@ class LoginView extends StatelessWidget {
           ),
         )
       ),
-      onTap: () => _authAnonymously(context),
+      onTap: () async => _authAnonymously(context),
     );
   }
 
   void _authAnonymously(BuildContext context) async {
     var authModel = context.read<FirebaseAuthModel>();
-
+    log("@!!!authModel: $authModel");
     var signResult = await authModel.signInWithGoogle();
 
     log("@!!signResult: $signResult");
