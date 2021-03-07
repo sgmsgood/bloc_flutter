@@ -1,10 +1,6 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_provider_firebase/ui/todo_list_page.dart';
-import 'package:provider/provider.dart';
-import 'package:provider/provider.dart';
-import 'package:user_authentication/user_authentication.dart';
 
 class LoginView extends StatelessWidget {
   @override
@@ -63,22 +59,23 @@ class LoginView extends StatelessWidget {
           ),
         )
       ),
-      onTap: () async => _authAnonymously(context),
+      onTap: () {
+      },
     );
   }
 
-  void _authAnonymously(BuildContext context) async {
-    var authModel = context.read<FirebaseAuthModel>();
-    log("@!!!authModel: $authModel");
-    var signResult = await authModel.signInWithGoogle();
-
-    log("@!!signResult: $signResult");
-    if(signResult == null) {
-      return;
-    }
-
-    _moveToListPage(context);
-  }
+  // void _authAnonymously(BuildContext context) async {
+  //   var authModel = context.read<FirebaseAuthModel>();
+  //   log("@!!!authModel: $authModel");
+  //   var signResult = await authModel.signInWithGoogle();
+  //
+  //   log("@!!signResult: $signResult");
+  //   if(signResult == null) {
+  //     return;
+  //   }
+  //
+  //   _moveToListPage(context);
+  // }
 
   void _moveToListPage(BuildContext context) {
     Navigator.of(context).popAndPushNamed('/listPage');
