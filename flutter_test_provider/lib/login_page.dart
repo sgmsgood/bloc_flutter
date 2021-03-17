@@ -10,12 +10,7 @@ class LoginPage extends StatelessWidget {
         child: Center(
           child: Column(
             children: [
-              Consumer<ImageModel>(
-                builder: (context, model, child) {
-                  return model.isShow() ? child : Container(height: 200);
-                },
-                child: Icon(Icons.image, size: 200,)
-              ),
+              context.watch<ImageModel>().isShow() ? Icon(Icons.image, size: 200,) : Container() ,
               SizedBox(height: 16,),
               Container(
                 child: ElevatedButton(
