@@ -1,9 +1,14 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_provider_firebase/model/firebase_auth_model.dart';
 import 'package:flutter_provider_firebase/ui/add_todo_page.dart';
+import 'package:provider/provider.dart';
 
 class TodoListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    log("@!!context: $context");
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -21,14 +26,20 @@ class TodoListPage extends StatelessWidget {
   Widget _buildButton(BuildContext context) {
     return Center(
       child: RaisedButton(
-          onPressed: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => AddTodoPage(),
-              ),
-            );
+          onPressed: () async {
+            var result = await Provider.of<FirebaseAuthModel>(context, listen: false).signInWithGoogle();
+            if(result.user != null) {
+              print("@!!!!-----------good");
+            } else {
+              print("@!!!!-----------bad");
+            }
+            // Navigator.of(context).push(
+            //   MaterialPageRoute(
+            //     builder: (context) => AddTodoPage(),
+            //   ),
+            // );
           },
-          child: Text("add schedule")),
+          child: Text("Todo List Page")),
     );
   }
 
