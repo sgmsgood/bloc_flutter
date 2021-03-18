@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:test_noti_flutter/pages/test_list_page.dart';
+import 'package:provider/provider.dart';
+import 'package:test_noti_flutter/pages/main_page.dart';
+import 'package:test_noti_flutter/provider/screen_size_provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    Provider<ScreenSizeProvider>(
+      create: (_) => ScreenSizeProvider(),
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
