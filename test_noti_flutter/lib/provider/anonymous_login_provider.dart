@@ -1,32 +1,32 @@
 import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-class AnonymousLoginProvider {
+class AnonymousLoginProvider with ChangeNotifier{
   FirebaseAuth _firebaseAuth;
   GoogleSignIn _googleSignIn;
-  var _isAuth = false;
+  var _isAuth = LoginState.error;
 
   FirebaseAuthModel() {
     _firebaseAuth = FirebaseAuth.instance;
-    _googleSignIn = GoogleSignIn();
+    // _googleSignIn = GoogleSignIn();
   }
 
   Future<void> authenticate() async {
-    _firebaseAuth = FirebaseAuth.instance;
     var result = await _firebaseAuth.signInAnonymously();
-    _isAuth = result != null;
-    // notifyListeners();
+    log("@!!result: ${result.user}/  credential: ${result.credential.token}");
+    // notif/yListeners();
   }
 
-  bool checkAuthenticated() {
-    _isAuth = _firebaseAuth.currentUser != null;
-    return _isAuth;
-  }
+  // bool checkAuthenticated() {
+  //   _isAuth = LoginState.done;
+  //   return _isAuth;
+  // }
 
-  bool isAuth() {
-    return _isAuth;
+  void isAuth() {
+
   }
 
   Future<bool> mustReturntrue() async {
@@ -53,4 +53,10 @@ class AnonymousLoginProvider {
     await _googleSignIn.signOut();
     await _firebaseAuth.signOut();
   }
+}
+
+enum LoginState {
+  error,
+  waiting,
+  done,
 }

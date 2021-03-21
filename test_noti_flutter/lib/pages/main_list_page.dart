@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:test_noti_flutter/provider/anonymous_login_provider.dart';
 import 'package:test_noti_flutter/provider/screen_size_provider.dart';
 
-class TestListPage extends StatelessWidget {
+class MainListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var sizeModel =  context.read<ScreenSizeProvider>().calc(context);

@@ -44,26 +44,18 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:18132961182:android:165b651bf945778db9388f",
+        "mobilesdk_app_id": "1:18132961182:android:8dc400f254db0124b9388f",
         "android_client_info": {
           "package_name": "com.elenworld.test_noti_flutter"
         }
       },
       "oauth_client": [
         {
-          "client_id": "18132961182-gtgdht9brmphs6tu63aevl42i10fqg1s.apps.googleusercontent.com",
+          "client_id": "18132961182-a2pjkhv79ji6ilvaionbfc5vqo5cie0b.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.elenworld.test_noti_flutter",
-            "certificate_hash": "a789e505c817a122ea906ea6eaa3d48b3a30ab18"
-          }
-        },
-        {
-          "client_id": "18132961182-l9glps71b53c5cctb83gk65s5tbrso6k.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.elenworld.test_noti_flutter",
-            "certificate_hash": "6bb96dcd0d998e21adbd7609044f67a5eb0c9d7b"
+            "certificate_hash": "522275c360cbcb1f55d082262f13937ddbddbfff"
           }
         },
         {

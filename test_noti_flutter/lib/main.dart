@@ -2,7 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:test_noti_flutter/pages/main_page.dart';
+import 'package:test_noti_flutter/components/circular_progress.dart';
+import 'package:test_noti_flutter/pages/main_list_page.dart';
 import 'package:test_noti_flutter/provider/anonymous_login_provider.dart';
 import 'package:test_noti_flutter/provider/screen_size_provider.dart';
 
@@ -12,11 +13,11 @@ void main() async{
 
   runApp(
     MultiProvider(
-      providers:[
+      providers: [
         Provider<ScreenSizeProvider>(
           create: (_) => ScreenSizeProvider(),
         ),
-        Provider<AnonymousLoginProvider>(
+        ChangeNotifierProvider<AnonymousLoginProvider>(
           create: (_) => AnonymousLoginProvider(),
         ),
       ],
@@ -26,6 +27,7 @@ void main() async{
 }
 
 class MyApp extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -33,23 +35,15 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: TestListPage(),
-      // FutureBuilder(
-      //   future: Firebase.initializeApp(),
-      //   builder: (context, snapshot) {
-      //     if(snapshot.connectionState == ConnectionState.waiting) {
-      //       return Stack(
-      //         children: [
-      //           CircularProgressIndicator(),
-      //         ],
-      //       );
-      //     }
-      //     if(snapshot.connectionState == ConnectionState.done) {
-      //       return TestListPage();
-      //     }
-      //     return Container(color: Colors.red);
-      //   },
-      // ),
+      home: Consumer<AnonymousLoginProvider>(
+        builder: (context, model, child) {
+          if(model == LoginState.error) {
+            return MainListPage();
+          }
+          return CircularProgress();
+        },
+        child: Container(color: Colors.red),
+      ),
     );
   }
 }
