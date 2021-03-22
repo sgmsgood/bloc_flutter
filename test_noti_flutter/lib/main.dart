@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +9,7 @@ import 'package:test_noti_flutter/pages/main_list_page.dart';
 import 'package:test_noti_flutter/provider/anonymous_login_provider.dart';
 import 'package:test_noti_flutter/provider/screen_size_provider.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
@@ -27,7 +29,6 @@ void main() async{
 }
 
 class MyApp extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -35,14 +36,15 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Consumer<AnonymousLoginProvider>(
-        builder: (context, model, child) {
-          if(model == LoginState.error) {
+      home: FutureBuilder(
+        future: context.read<AnonymousLoginProvider>().authenticate(),
+        builder: (context, snapshot) {
+          if(snapshot.connectionState == ConnectionState.done) {
             return MainListPage();
           }
-          return CircularProgress();
-        },
-        child: Container(color: Colors.red),
+
+          return CircularProgressPage();
+        }
       ),
     );
   }
