@@ -17,15 +17,26 @@ class MainListPage extends StatelessWidget {
         child: ListView(
           children: [
            Container(
-             child: FutureBuilder<DocumentSnapshot>(
-                future: users.doc('JUnM3VFDkFHQmQyydBsD').get(),
+             child: StreamBuilder<QuerySnapshot>(
+               stream: users.snapshots(),
                builder: (context, snapshot) {
-                 if (snapshot.connectionState == ConnectionState.done) {
-                   Map<String, dynamic> data = snapshot.data.data();
-                   return Text("Full Name: ${data['complete']} ${data['note']}");
+                 if (snapshot.hasError) {
+                   return Text('Something went wrong');
                  }
 
-                 return Text("loading");
+                 if (snapshot.connectionState == ConnectionState.waiting) {
+                   return Text("Loading");
+                 }
+
+                 return ListView(
+                   shrinkWrap: true,
+                   children: snapshot.data.docs.map((DocumentSnapshot document) {
+                     return new ListTile(
+                       title: new Text(document.data()['note']),
+                       subtitle: new Text(document.data()['task']),
+                     );
+                   }).toList(),
+                 );
                },
              )
            ),
