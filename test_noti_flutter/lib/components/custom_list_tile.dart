@@ -5,8 +5,6 @@ class CustomListTile extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final double width = size.width;
-    final double height = size.height;
-    final double startMargin = width / 14;
 
     RRect rRect = RRect.fromRectXY(Rect.fromLTRB(0.0, 0.0, 310.0, 220.0), 40, 40);
     canvas.drawRRect(
@@ -31,11 +29,6 @@ class CustomListTile extends CustomPainter {
 
     canvas.save();
     canvas.restore();
-
-    // canvas.drawPath(
-    //   Path.combine(PathOperation.difference, Path()..addRRect(,), Path()
-    //     ..addOval(Rect.fromCircle(center: Offset(30, 35), radius: 11))
-    //     ,), myPaint,);
   }
 
   @override
