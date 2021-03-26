@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:test_noti_flutter/components/circular_progress.dart';
+import 'package:test_noti_flutter/components/circular_progress_widget.dart';
 import 'package:test_noti_flutter/pages/main_list_page.dart';
 import 'package:test_noti_flutter/provider/anonymous_login_provider.dart';
 import 'package:test_noti_flutter/provider/screen_size_provider.dart';
