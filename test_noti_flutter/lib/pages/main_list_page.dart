@@ -4,8 +4,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:test_noti_flutter/components/custom_list_tile.dart';
+import 'package:test_noti_flutter/model/tests.dart';
 import 'package:test_noti_flutter/provider/anonymous_login_provider.dart';
 import 'package:test_noti_flutter/provider/screen_size_provider.dart';
+
+import 'list_page.dart';
 
 class MainListPage extends StatelessWidget {
   @override
@@ -15,45 +18,42 @@ class MainListPage extends StatelessWidget {
     CollectionReference users = FirebaseFirestore.instance.collection('test');
     return Scaffold(
       body: SafeArea(
-        child: ListView(
-          children: [
-            Container(
-                child: StreamBuilder<QuerySnapshot>(
-                  stream: users.snapshots(),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasError) {
-                      return Text('Something went wrong');
-                    }
-
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Text("Loading");
-                    }
-
-                    return ListView(
-                      shrinkWrap: true,
-                      children: snapshot.data.docs.map(
-                            (DocumentSnapshot document) {
-                              log("@!!-----e: ${document.data()}");
-                          // log("@!!-----e: $document");
-                          return SizedBox(
-                            height: 300,
-                            child: CustomPaint(
-                                painter: CustomListTile(),
-                                child: Container(
-                                  height: 300,
-                                )),
-                          );
-
-                          // return new ListTile(
-                          // title: new Text(document.id),
-                          // subtitle: new Text(document.data()['task']),
-                          // );
-                          },
-                      ).toList(),
-                    );
-                  },
-                )),
-          ],
+        child: ListView.builder(
+          itemCount: testList.length,
+          itemBuilder: (BuildContext context, int index) {
+            return Material(
+              child: InkWell(
+                onTap: () {
+                  // Navigator.push(context, MaterialPageRoute(builder: (context) => ListPage()));
+                },
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: 310,
+                      height: 220,
+                      child: Stack(
+                        children: [
+                          CustomPaint(
+                            painter: CustomListTile(),
+                          ),
+                          Center(
+                            child: Text(
+                              testMap[testList[index]],
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 30),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                  ],
+                ),
+              ),
+            );
+          },
         ),
       ),
     );

@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -6,7 +8,7 @@ class CustomListTile extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final double width = size.width;
 
-    RRect rRect = RRect.fromRectXY(Rect.fromLTRB(0.0, 0.0, 310.0, 220.0), 40, 40);
+    RRect rRect = RRect.fromRectXY(Rect.fromLTRB(0.0, 0.0, 310.0, 200.0), 40, 40);
     canvas.drawRRect(
         rRect,
         Paint()
@@ -19,11 +21,15 @@ class CustomListTile extends CustomPainter {
 
     // RRect rightTop = RRect.fromRectAndCorners(Rect.fromLTRB(220,0, 300, 30), bottomLeft: Radius.circular(200.0), topRight: Radius.circular(200.0), bottomRight: Radius.circular(80.0));
     Rect rightTop = Rect.fromCircle(center: Offset(282, -13), radius: 50);
-    canvas.drawOval(rightTop, Paint()..color = Color(0xFFFFE0AC)
+    // canvas.drawOval(rightTop, Paint()..color = Color(0xFFFFE0AC)
+    //   ..style = PaintingStyle.fill
+    // ..blendMode = BlendMode.softLight);
+    // canvas.clipRect(rightTop, clipOp: ClipOp.difference, doAntiAlias: true);
+    var paint = Paint()..color = Color(0xFFFFE0AC)
       ..style = PaintingStyle.fill
-    ..blendMode = BlendMode.lighten);
+    ..blendMode = BlendMode.lighten;
 
-    RRect rightRect = RRect.fromRectAndCorners(Rect.fromLTRB(278,184, 287, 195), topRight: Radius.circular(10.0), topLeft: Radius.circular(9.0), bottomRight: Radius.circular(14.0));
+    RRect rightRect = RRect.fromRectAndCorners(Rect.fromLTRB(278, 174, 287, 185), topRight: Radius.circular(10.0), topLeft: Radius.circular(9.0), bottomRight: Radius.circular(14.0));
     canvas.drawRRect(rightRect, Paint()..color = Color(0xFFFFE0AC)
       ..style = PaintingStyle.fill);
 
