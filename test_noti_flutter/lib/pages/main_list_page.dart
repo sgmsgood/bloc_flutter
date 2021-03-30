@@ -24,7 +24,7 @@ class MainListPage extends StatelessWidget {
             return Material(
               child: InkWell(
                 onTap: () {
-                  // Navigator.push(context, MaterialPageRoute(builder: (context) => ListPage()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => ListPage(index)));
                 },
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
