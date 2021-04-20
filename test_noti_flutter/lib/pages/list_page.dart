@@ -14,6 +14,22 @@ class ListPage extends StatelessWidget {
     Query query = FirebaseFirestore.instance.collection(testList[_index]);
 
     log("@!!query: ${query.snapshots()}");
-    return Container();
+    return ListView(
+        children: [
+          Container(
+              // child: FutureBuilder<DocumentSnapshot>(
+              //   future: query.doc('JUnM3VFDkFHQmQyydBsD').get(),
+              //   builder: (context, snapshot) {
+              //     if (snapshot.connectionState == ConnectionState.done) {
+              //       Map<String, dynamic> data = snapshot.data.data();
+              //       return Text("Full Name: ${data['complete']} ${data['note']}");
+              //     }
+              //
+              //     return Text("loading");
+              //   },
+              // )
+          ),
+        ],
+    );
   }
 }

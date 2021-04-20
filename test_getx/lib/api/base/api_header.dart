@@ -1,0 +1,10 @@
+import 'dart:io';
+
+final String _barerToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoVG9rZW4iOiJleUpoYkdjaU9pSklVekkxTmlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKcFpDSTZJbTFUYUZodmNWRTVVakZ3VEhkeVQzazVkbGR0SWl3aVpXMWhhV3dpT2lKdmNIVnpiMjVsYTI5eVpXRnVRR2R0WVdsc0xtTnZiU0lzSW01aGJXVWlPaUp2Y0hWemIyNWxJaXdpWlhod2FYSmxJam94TmpRMk16ZzBOekl3TmpjeExDSnBZWFFpT2pFMk1UUTRORGczTWpGOS5YNDFkODZDUjhmTG1HRHMwcXZhaDFIdkh6ck8zVFN1WjFnNG96ZkRCZ0FjIiwiaWQiOiJtU2hYb3FROVIxcEx3ck95OXZXbSIsImlhdCI6MTYxNDg0ODcyMX0.oTLSCE0ZKTPYUgR-rcIy5Jf9EOjzhV_NJFyp_eQ1cfs";
+
+class ApiHeader {
+  static Map<String, String> header = Map.from({
+    HttpHeaders.contentTypeHeader: 'application/json',
+    HttpHeaders.authorizationHeader: "Bearer $_barerToken"
+  });
+}
