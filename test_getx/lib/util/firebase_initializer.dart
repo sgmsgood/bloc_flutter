@@ -1,10 +1,13 @@
 
+import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
+import 'package:test_getx/controller/oauth/config_controller.dart';
 import 'package:test_getx/controller/oauth/messaging/fcm_message_provider.dart';
 
 class FirebaseInitializer {
+  ConfigController config = Get.find();
   final _kShouldTestAsyncErrorOnInit = false;
   final _kTestingCrashlytics = false;
   final _kDebugMode = true;
@@ -29,8 +32,8 @@ class FirebaseInitializer {
       await _testAsyncErrorOnInit();
     }
 
-    await FcmMessageProvider().getFCMToken();
-    // config.deviceToken = token;
+    var token = await FcmMessageProvider().getFCMToken();
+    config.deviceToken = token;
   }
 
   Future<void> _testAsyncErrorOnInit() async {
